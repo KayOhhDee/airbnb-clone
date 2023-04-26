@@ -32,11 +32,17 @@ const RegisterModal = () => {
     }
   })
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
 
-    // axios call goes here
-    toast.error("Something went wrong!")
+    try {
+      await axios.post("/api/auth/register", data)
+      registerModal.onClose()
+    } catch (e) {
+      toast.error("Something went wrong!")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const bodyContent = (
@@ -64,6 +70,7 @@ const RegisterModal = () => {
       <Input 
         id='password'
         label='Password'
+        type='password'
         disabled={isLoading}
         register={register} 
         errors={errors}
