@@ -1,4 +1,3 @@
-'use client';
 import { Nunito } from 'next/font/google'
 import Navbar from './navbar'
 import RegisterModal from '../modals/RegisterModal';
@@ -8,6 +7,7 @@ import LoginModal from '../modals/LoginModal';
 const nunito = Nunito({ subsets: ['latin'] })
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
+ 
   return (
     <>
       <ToasterProvider />
