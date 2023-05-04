@@ -5,6 +5,7 @@ import ToasterProvider from '@/providers/ToasterProvider';
 import LoginModal from '@/components/modals/LoginModal';
 
 import './globals.css'
+import getCurrentUser from '@/actions/getCurrentUser';
 
 export const metadata = {
   title: 'Airbnb',
@@ -17,14 +18,15 @@ const nunito = Nunito({
 
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
- 
+  const currentUser = await getCurrentUser()
+
   return (
     <html lang="en">
       <body className={nunito.className}>
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <main>
           {children}
         </main>
